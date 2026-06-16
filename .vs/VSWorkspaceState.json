@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\GeekShopping",
+    "\\GeekShopping\\GeekShopping.ProductAPI",
+    "\\GeekShopping\\GeekShopping.ProductAPI\\Model",
+    "\\GeekShopping\\GeekShopping.ProductAPI\\Model\\Base"
+  ],
+  "SelectedNode": "\\GeekShopping\\GeekShopping.ProductAPI\\Model\\Base\\BaseEntity.cs",
+  "PreviewInSolutionExplorer": false
+}
