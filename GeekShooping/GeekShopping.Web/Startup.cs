@@ -31,9 +31,9 @@ namespace GeekShopping.Web
             services.AddHttpClient<ICartService, CartService>(c =>
                     c.BaseAddress = new Uri(Configuration["ServiceUrls:CartAPI"])
                 );
-            //services.AddHttpClient<ICouponService, CouponService>(c =>
-            //        c.BaseAddress = new Uri(Configuration["ServiceUrls:CouponAPI"])
-            //    );
+            services.AddHttpClient<ICouponService, CouponService>(c =>
+                    c.BaseAddress = new Uri(Configuration["ServiceUrls:CouponAPI"])
+                );
             services.AddControllersWithViews();
             services.AddAuthentication(options =>
             {
@@ -41,7 +41,7 @@ namespace GeekShopping.Web
                 options.DefaultChallengeScheme = "oidc";
             })
                 .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
-                .AddOpenIdConnect("oidc", options => 
+                .AddOpenIdConnect("oidc", options =>
                 {
                     options.Authority = Configuration["ServiceUrls:IdentityServer"];
                     options.GetClaimsFromUserInfoEndpoint = true;
