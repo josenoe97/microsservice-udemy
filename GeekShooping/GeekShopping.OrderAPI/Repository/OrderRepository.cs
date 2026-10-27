@@ -18,11 +18,20 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<bool> AddOrder(OrderHeader header)
         {
-            if(header == null) return false;
+            if (header == null) return false;
+
             await using var _db = new MySQLContext(_context);
-            _db.Headers.Add(header);
-            await _db.SaveChangesAsync();
-            return true;
+            try
+            {
+                _db.Headers.Add(header);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.InnerException?.Message);
+                throw;
+            }
         }
 
         public async Task UpdateOrderPaymentStatus(long orderHeaderId, bool status)

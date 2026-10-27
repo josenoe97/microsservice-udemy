@@ -48,7 +48,7 @@ namespace GeekShopping.OrderAPI.Model
         [Column("expiry_month_year")]
         public string ExpiryMonthYear { get; set; }
 
-        [Column("total_itens")]
+        [Column("total_items")]
         public int CartTotalItens { get; set; }
 
         public List<OrderDetail> OrderDetails { get; set; }
