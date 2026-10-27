@@ -3,9 +3,6 @@ using GeekShopping.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +28,7 @@ namespace GeekShopping.Web.Controllers
         {
             return View(await FindUserCart());
         }
-
+        
         [HttpPost]
         [ActionName("ApplyCoupon")]
         public async Task<IActionResult> ApplyCoupon(CartViewModel model)
@@ -47,7 +44,7 @@ namespace GeekShopping.Web.Controllers
             }
             return View();
         }
-
+        
         [HttpPost]
         [ActionName("RemoveCoupon")]
         public async Task<IActionResult> RemoveCoupon()
@@ -71,7 +68,7 @@ namespace GeekShopping.Web.Controllers
 
             var response = await _cartService.RemoveFromCart(id, token);
 
-            if (response)
+            if(response)
             {
                 return RedirectToAction(nameof(CartIndex));
             }
@@ -88,7 +85,6 @@ namespace GeekShopping.Web.Controllers
         public async Task<IActionResult> Checkout(CartViewModel model)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
-            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
 
             var response = await _cartService.Checkout(model.CartHeader, token);
 

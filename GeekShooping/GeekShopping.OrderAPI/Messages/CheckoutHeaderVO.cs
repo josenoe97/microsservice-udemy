@@ -1,7 +1,6 @@
-﻿using System;
+﻿using GeekShopping.MessageBus;
+using System;
 using System.Collections.Generic;
-using GeekShopping.MessageBus;
-using GeekShopping.OrderAPI.Data.ValueObjects;
 
 namespace GeekShopping.OrderAPI.Messages
 {

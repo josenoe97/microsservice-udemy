@@ -48,10 +48,9 @@ namespace GeekShopping.CartAPI
             services.AddScoped<ICouponRepository, CouponRepository>();
 
             services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
-
             services.AddControllers();
 
-            services.AddHttpClient<ICouponRepository, CouponRepository>(s => s.BaseAddress = 
+            services.AddHttpClient<ICouponRepository, CouponRepository>(s => s.BaseAddress =
                 new Uri(Configuration["ServiceUrls:CouponAPI"]));
 
             services.AddAuthentication("Bearer")

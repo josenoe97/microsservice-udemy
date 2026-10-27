@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
-using GeekShopping.CouponAPI.Data.ValueObjects;
-using GeekShopping.CouponAPI.Model;
+﻿using GeekShopping.CouponAPI.Data.ValueObjects;
 using GeekShopping.CouponAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GeekShopping.CouponAPI.Controllers
 {
-    [ApiController]
+
     [Route("api/v1/[controller]")]
+    [ApiController]
     public class CouponController : ControllerBase
     {
         private ICouponRepository _repository;

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Text.Json;
-using GeekShopping.MessageBus;
+﻿using GeekShopping.MessageBus;
 using GeekShopping.OrderAPI.Messages;
 using RabbitMQ.Client;
+using System;
+using System.Text;
+using System.Text.Json;
 
 namespace GeekShopping.OrderAPI.RabbitMQSender
 {
@@ -24,24 +24,23 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
         public void SendMessage(BaseMessage message, string queueName)
         {
             if(ConnectionExists())
-            { 
+            {
                 using var channel = _connection.CreateModel();
                 channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
-                byte[] body = GetMessageAsByteArryz(message);
-                channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
+                byte[] body = GetMessageAsByteArray(message);
+                channel.BasicPublish(
+                    exchange: "", routingKey: queueName, basicProperties: null, body: body);
             }
         }
 
-        private byte[] GetMessageAsByteArryz(BaseMessage message)
+        private byte[] GetMessageAsByteArray(BaseMessage message)
         {
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true
+                WriteIndented = true,
             };
-
             var json = JsonSerializer.Serialize<PaymentVO>((PaymentVO)message, options);
             var body = Encoding.UTF8.GetBytes(json);
-
             return body;
         }
 
@@ -55,19 +54,18 @@ namespace GeekShopping.OrderAPI.RabbitMQSender
                     UserName = _userName,
                     Password = _password
                 };
-
                 _connection = factory.CreateConnection();
             }
             catch (Exception)
             {
-                // Log exception
+                //Log exception
                 throw;
             }
         }
 
         private bool ConnectionExists()
-        {
-            if (_connection != null) return true;
+        {   
+            if(_connection != null) return true;
             CreateConnection();
             return _connection != null;
         }

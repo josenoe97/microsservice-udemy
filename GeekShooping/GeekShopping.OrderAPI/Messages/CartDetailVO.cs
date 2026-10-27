@@ -1,4 +1,4 @@
-﻿namespace GeekShopping.OrderAPI.Data.ValueObjects
+﻿namespace GeekShopping.OrderAPI.Messages
 {
     public class CartDetailVO
     {
@@ -6,6 +6,7 @@
         public long CartHeaderId { get; set; }
         public long ProductId { get; set; }
         public virtual ProductVO Product { get; set; }
+
         public int Count { get; set; }
     }
 }

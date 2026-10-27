@@ -47,12 +47,12 @@ namespace GeekShopping.Web.Controllers
         public async Task<IActionResult> DetailsPost(ProductViewModel model)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
-            
-            CartViewModel cart = new CartViewModel()
+
+            CartViewModel cart = new()
             {
-                CartHeader = new CartHeaderViewModel()
+                CartHeader = new CartHeaderViewModel
                 {
-                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value,
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
                 }
             };
 
@@ -64,20 +64,16 @@ namespace GeekShopping.Web.Controllers
             };
 
             List<CartDetailViewModel> cartDetails = new List<CartDetailViewModel>();
-            
             cartDetails.Add(cartDetail);
             cart.CartDetails = cartDetails;
 
             var response = await _cartService.AddItemToCart(cart, token);
-
             if(response != null)
             {
                 return RedirectToAction(nameof(Index));
             }
-
             return View(model);
         }
-
 
         public IActionResult Privacy()
         {

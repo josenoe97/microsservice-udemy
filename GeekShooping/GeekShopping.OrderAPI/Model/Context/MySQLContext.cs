@@ -6,7 +6,7 @@ namespace GeekShopping.OrderAPI.Model.Context
     {
         public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) {}
 
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderDetail> Details { get; set; }
         public DbSet<OrderHeader> Headers { get; set; }
     }
 }

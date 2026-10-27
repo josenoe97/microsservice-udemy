@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-#nullable disable
-
 namespace GeekShopping.CouponAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
@@ -15,8 +13,8 @@ namespace GeekShopping.CouponAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.36")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "6.0.0-preview.6.21352.1");
 
             modelBuilder.Entity("GeekShopping.CouponAPI.Model.Coupon", b =>
                 {
@@ -43,19 +41,13 @@ namespace GeekShopping.CouponAPI.Migrations
                         new
                         {
                             Id = 1L,
-                            CouponCode = "10OFF",
+                            CouponCode = "ERUDIO_2022_10",
                             DiscountAmount = 10m
                         },
                         new
                         {
                             Id = 2L,
-                            CouponCode = "EURUDIO_2022_10",
-                            DiscountAmount = 10m
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CouponCode = "EURUDIO_2022_15",
+                            CouponCode = "ERUDIO_2022_15",
                             DiscountAmount = 15m
                         });
                 });

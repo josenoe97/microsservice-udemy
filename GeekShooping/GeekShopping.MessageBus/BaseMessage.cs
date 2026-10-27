@@ -1,4 +1,6 @@
-﻿namespace GeekShopping.MessageBus
+﻿using System;
+
+namespace GeekShopping.MessageBus
 {
     public class BaseMessage
     {

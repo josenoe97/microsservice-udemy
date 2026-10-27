@@ -1,11 +1,13 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using GeekShopping.Web.Models;
+﻿using GeekShopping.Web.Models;
 using GeekShopping.Web.Services.IServices;
 using GeekShopping.Web.Utils;
-using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace GeekShopping.Web.Services
 {
@@ -38,7 +40,7 @@ namespace GeekShopping.Web.Services
         public async Task<CartViewModel> UpdateCart(CartViewModel model, string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _client.PostAsJson($"{BasePath}/update-cart", model);
+            var response = await _client.PutAsJson($"{BasePath}/update-cart", model);
             if (response.IsSuccessStatusCode)
                 return await response.ReadContentAs<CartViewModel>();
             else throw new Exception("Something went wrong when calling API");
@@ -78,23 +80,15 @@ namespace GeekShopping.Web.Services
             if (response.IsSuccessStatusCode)
             {
                 return await response.ReadContentAs<CartHeaderViewModel>();
-            }
-            else if (response.StatusCode.ToString().Equals("PreconditionFailed"))
-            {
-                return "Coupon Price has changed, please confirme!";
+            } else if (response.StatusCode.ToString().Equals("PreconditionFailed")) {
+                return "Coupon Price has changed, please confirm!";
             }
             else throw new Exception("Something went wrong when calling API");
         }
 
         public async Task<bool> ClearCart(string userId, string token)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
-
-
-
-
-
     }
 }

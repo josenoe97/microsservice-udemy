@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using GeekShopping.CouponAPI.Config;
 using GeekShopping.CouponAPI.Model.Context;
 using GeekShopping.CouponAPI.Repository;

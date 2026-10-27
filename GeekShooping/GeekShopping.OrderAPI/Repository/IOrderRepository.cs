@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using GeekShopping.OrderAPI.Model;
+﻿using GeekShopping.OrderAPI.Model;
+using System.Threading.Tasks;
 
-namespace GeekShopping.OrderAPI.Repository
+namespace GeekShopping.CartAPI.Repository
 {
     public interface IOrderRepository
     {
         Task<bool> AddOrder(OrderHeader header);
-        Task<bool> UpdateOrderPaymentStatus(long orderHeaderId, bool status);
+        Task UpdateOrderPaymentStatus(long orderHeaderId, bool paid);
     }
 }

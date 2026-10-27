@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GeekShopping.CouponAPI.Model.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GeekShopping.CouponAPI.Model.Base;
 
 namespace GeekShopping.CouponAPI.Model
 {

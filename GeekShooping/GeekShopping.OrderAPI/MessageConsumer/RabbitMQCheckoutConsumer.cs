@@ -1,16 +1,17 @@
-﻿using System;
+﻿using GeekShopping.CartAPI.Repository;
+using GeekShopping.OrderAPI.Messages;
+using GeekShopping.OrderAPI.Model;
+using GeekShopping.OrderAPI.RabbitMQSender;
+using Microsoft.Extensions.Hosting;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GeekShopping.OrderAPI.Messages;
-using GeekShopping.OrderAPI.Model;
-using GeekShopping.OrderAPI.RabbitMQSender;
-using GeekShopping.OrderAPI.Repository;
-using Microsoft.Extensions.Hosting;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 
 namespace GeekShopping.OrderAPI.MessageConsumer
 {
@@ -22,9 +23,10 @@ namespace GeekShopping.OrderAPI.MessageConsumer
         private IRabbitMQMessageSender _rabbitMQMessageSender;
 
         public RabbitMQCheckoutConsumer(OrderRepository repository,
-                                        IRabbitMQMessageSender rabbitMQMessageSender)
+            IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _repository = repository;
+            _rabbitMQMessageSender = rabbitMQMessageSender;
             var factory = new ConnectionFactory
             {
                 HostName = "localhost",
@@ -33,8 +35,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "checkoutqueue", false, false, false, arguments: null);
-            _rabbitMQMessageSender = rabbitMQMessageSender;
+            _channel.QueueDeclare(queue: "checkoutqueue", false, false, false, arguments: null);  
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -65,7 +66,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 CVV = vo.CVV,
                 DiscountAmount = vo.DiscountAmount,
                 Email = vo.Email,
-                ExpiryMothYear = vo.ExpiryMothYear,
+                ExpiryMonthYear = vo.ExpiryMothYear,
                 OrderTime = DateTime.Now,
                 PurchaseAmount = vo.PurchaseAmount,
                 PaymentStatus = false,
@@ -93,12 +94,11 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 Name = order.FirstName + " " + order.LastName,
                 CardNumber = order.CardNumber,
                 CVV = order.CVV,
-                ExpiryMonthYear = order.ExpiryMothYear,
+                ExpiryMonthYear = order.ExpiryMonthYear,
                 OrderId = order.Id,
                 PurchaseAmount = order.PurchaseAmount,
                 Email = order.Email
             };
-
             try
             {
                 _rabbitMQMessageSender.SendMessage(payment, "orderpaymentprocessqueue");

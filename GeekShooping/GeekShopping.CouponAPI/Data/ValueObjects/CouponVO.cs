@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GeekShopping.CouponAPI.Data.ValueObjects
+﻿namespace GeekShopping.CouponAPI.Data.ValueObjects
 {
     public class CouponVO
     {

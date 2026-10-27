@@ -41,7 +41,7 @@ namespace GeekShopping.Web
                 options.DefaultChallengeScheme = "oidc";
             })
                 .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
-                .AddOpenIdConnect("oidc", options =>
+                .AddOpenIdConnect("oidc", options => 
                 {
                     options.Authority = Configuration["ServiceUrls:IdentityServer"];
                     options.GetClaimsFromUserInfoEndpoint = true;

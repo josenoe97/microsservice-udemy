@@ -1,4 +1,6 @@
-﻿namespace GeekShopping.MessageBus
+﻿using System.Threading.Tasks;
+
+namespace GeekShopping.MessageBus
 {
     public interface IMessageBus
     {

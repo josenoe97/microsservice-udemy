@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-#nullable disable
-
 namespace GeekShopping.OrderAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
@@ -16,8 +14,8 @@ namespace GeekShopping.OrderAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.36")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "6.0.0-preview.6.21352.1");
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderDetail", b =>
                 {
@@ -38,7 +36,8 @@ namespace GeekShopping.OrderAPI.Migrations
                         .HasColumnName("price");
 
                     b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("ProductId");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("longtext")
@@ -68,7 +67,7 @@ namespace GeekShopping.OrderAPI.Migrations
 
                     b.Property<int>("CartTotalItens")
                         .HasColumnType("int")
-                        .HasColumnName("total_items");
+                        .HasColumnName("total_itens");
 
                     b.Property<string>("CouponCode")
                         .HasColumnType("longtext")
@@ -86,7 +85,7 @@ namespace GeekShopping.OrderAPI.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("email");
 
-                    b.Property<string>("ExpiryMothYear")
+                    b.Property<string>("ExpiryMonthYear")
                         .HasColumnType("longtext")
                         .HasColumnName("expiry_month_year");
 
